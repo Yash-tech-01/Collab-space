@@ -1,23 +1,35 @@
+import "../instrument.mjs";     // Sentry documentation file for monitoring errors
 import express from "express";
 import {ENV} from "./config/env.js";
 import { connectDB } from "./config/db.js";
 import {clerkMiddleware} from "@clerk/express"; 
 import { inngest, functions } from "./config/inngest.js";
 import { serve } from "inngest/express";
- 
+import chatRoutes from "./routes/chat.route.js";
+
+import * as Sentry from "@sentry/node";
 
 const app = express();
+
 
 app.use(express.json()); // express midddleware use for parsing JSON bodies
 app.use(clerkMiddleware()); // req.auth is avaliable and also checks wether user is authenticated or not
 
-app.use("/api/inngest",serve({ client: inngest, functions}));
+
+app.get("/debug-sentry", (req, res)=>{
+    throw new Error("My first Sentry error!");
+});
+
 
 app.get("/", (req,res)=>{
     res.send("this is your response");
 });
 
-// console.log(ENV.MONGO_URI);
+app.use("/api/inngest",serve({ client: inngest, functions}));
+app.use("/api/chat", chatRoutes);
+
+Sentry.setupExpressErrorHandler(app);
+
 
 
 // app.listen(ENV.PORT, (req, res)=>{ 
@@ -26,6 +38,8 @@ app.get("/", (req,res)=>{
 // })
 
 
+
+// Use this starting function so that it can properly work with vercel
 const startServer = async() => {
     try{
         await connectDB();
