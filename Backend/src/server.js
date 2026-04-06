@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json()); // express midddleware use for parsing JSON bodies
 app.use(clerkMiddleware()); // req.auth is avaliable and also checks wether user is authenticated or not
 
-app.use("/api/inngest",serve({ client: inngest, functions: [functions] }));
+app.use("/api/inngest",serve({ client: inngest, functions}));
 
 app.get("/", (req,res)=>{
     res.send("this is your response");
