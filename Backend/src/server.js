@@ -3,6 +3,7 @@ import {ENV} from "./config/env.js";
 import { connectDB } from "./config/db.js";
 import {clerkMiddleware} from "@clerk/express"; 
 import {inngest} from "./config/inngest.js";
+import { inngest, functions } from "inngest.js";
 import { serve } from "inngest/express";
  
 
@@ -11,7 +12,7 @@ const app = express();
 app.use(express.json()); // express midddleware use for parsing JSON bodies
 app.use(clerkMiddleware()); // req.auth is avaliable and also checks wether user is authenticated or not
 
-app.use("/api/inngest",serve({ client: inngest, functions: [fnA] }));
+app.use("/api/inngest",serve({ client: inngest, functions: [functions] }));
 
 app.get("/", (req,res)=>{
     res.send("this is your response");
