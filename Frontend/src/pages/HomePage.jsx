@@ -5,7 +5,8 @@ const HomePage = () => {
   return (
     <div>
         <UserButton />
-        HomePage</div>
+        HomePage
+    </div>
   )
 }
 
