@@ -1,7 +1,9 @@
 import React from 'react'
 
-export const CallPAge = () => {
+const CallPage = () => {
   return (
-    <div>CallPAge</div>
+    <div>CallPage</div>
   )
 }
+
+export default CallPage;

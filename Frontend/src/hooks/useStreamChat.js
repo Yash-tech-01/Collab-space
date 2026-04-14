@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { StreamChat } from "stream-chat";
-import { useUser } from "@clerk/react";
+import { useAuth, useUser } from "@clerk/react";
 import { useQuery } from "@tanstack/react-query";
 import { getStreamToken } from "../lib/api";
 import * as Sentry from "@sentry/react";
@@ -71,5 +71,5 @@ export const useStreamChat = () => {
     };
   }, [tokenData?.token, user?.id]);
 
-  return { chatClient, isLoading :tokenLoading, error : tokenError };
+  return {chatClient, isLoading, error};
 };
