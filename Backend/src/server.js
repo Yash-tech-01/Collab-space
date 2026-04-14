@@ -6,6 +6,7 @@ import {clerkMiddleware} from "@clerk/express";
 import { inngest, functions } from "./config/inngest.js";
 import { serve } from "inngest/express";
 import chatRoutes from "./routes/chat.route.js";
+import cors from "cors";
 
 import * as Sentry from "@sentry/node";
 
@@ -13,6 +14,7 @@ const app = express();
 
 
 app.use(express.json()); // express midddleware use for parsing JSON bodies
+app.use(cors({origin:"http://localhost:5173", credentials: true}));
 app.use(clerkMiddleware()); // req.auth is avaliable and also checks wether user is authenticated or not
 
 

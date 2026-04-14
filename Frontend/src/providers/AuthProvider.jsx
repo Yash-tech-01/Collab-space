@@ -17,6 +17,7 @@ export default function AuthProvider({ children }) {
       async (config) => {
         try {
           const token = await getToken();
+
           if (token) config.headers.Authorization = `Bearer ${token}`;
         } catch (error) {
           if (error.message?.includes("auth") || error.message?.includes("token")) {
