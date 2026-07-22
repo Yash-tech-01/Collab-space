@@ -20,7 +20,11 @@ const InviteModal = ({ channel, onClose }) => {
       try {
         const members = Object.keys(channel.state.members);
         const res = await client.queryUsers({ id: { $nin: members } }, { name: 1 }, { limit: 30 });
-        setUsers(res.users);
+        // setUsers(res.users);
+        setUsers(
+        res.users.filter((user) => !user.id.startsWith("recording-"))
+        );
+
       } catch (error) {
         console.log("Error fetching users", error);
         setError("Failed to load users");
