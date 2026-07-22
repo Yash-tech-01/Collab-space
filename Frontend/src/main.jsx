@@ -44,7 +44,7 @@ Sentry.init({
 
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  // <StrictMode>
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
 
       <BrowserRouter>
@@ -57,5 +57,5 @@ createRoot(document.getElementById('root')).render(
       </BrowserRouter>
 
     </ClerkProvider>
-  </StrictMode>,
+  // </StrictMode>,
 );
